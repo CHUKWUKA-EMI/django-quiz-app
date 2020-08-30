@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>Quiz</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="../static/script.js"></script>
+
+		<style>
+			body {
+				background-color: #f0f3f8;
+			}
+			.container {
+				width: 800px;
+				margin-top: 50px;
+				margin-right: auto;
+				margin-left: auto;
+			}
+			#btn {
+				display: block;
+				background-color: #063131;
+				color: white;
+				font-size: 17px;
+				font-weight: 600;
+				width: 10rem;
+				height: 3rem;
+				cursor: pointer;
+				margin-bottom: 2rem;
+				border-radius: 1rem;
+			}
+			#btn:hover {
+				background-color: #10cccc;
+				color: white;
+				border: 1.5px solid white;
+			}
+		</style>
+	</head>
+	<body>
+		<center><h2>QUIZ</h2></center>
+		<hr />
+		<div class="container">
+			<p style="font-size: 18px">
+				<b>Instructions</b>: To display the story passage, click on the 'Start
+				Quiz' button. To ensure the integrity of the process, you can only view
+				the passage once you start the timer. You have 3 minutes to read the
+				story and answer the questions. Once the time elapses, the system will
+				be automatically disabled. If you fail to submit before time, you will
+				have no score.
+			</p>
+			<hr />
+			<div id="story">
+				{% for story in stories%}
+				<center>
+					<h3 style="color: brown; font-size: 20px">{{story.name}}</h3>
+				</center>
+				<div id="story" style="font-size: 20px">{{story.content}}</div>
+				{% endfor%}
+			</div>
+			<hr />
+			<div
+				style="
+					display: flex;
+					flex-direction: row;
+					justify-content: space-between;
+					align-items: center;
+				"
+			>
+				<h4 id="qstn" style="font-size: 18px">Questions</h4>
+				<div>
+					<button
+						style="
+							margin-right: 10rem;
+							color: white;
+							background-color: black;
+							width: 5rem;
+							height: 2.5rem;
+							border-radius: 0.5rem;
+							cursor: pointer;
+						"
+						id="startBtn"
+					>
+						Start Quiz
+					</button>
+				</div>
+				<div
+					style="
+						position: fixed;
+						top: 25rem;
+						right: 5px;
+						margin-right: 4rem;
+						z-index: 1;
+						font-size: larger;
+						font-weight: bold;
+					"
+					id="timer"
+				></div>
+			</div>
+			<div id="quiz">
+				{%for question in questions%}
+				<div id="quiz">
+					<label>{{question.id}} ) <b>{{question.question}}</b></label>
+					<div style="margin-top: 0.6rem">
+						<span class="optionVal"
+							><input
+								type="radio"
+								class="rdbtn"
+								id="rdbtn"
+								name="{{question.id}}"
+								value="{{question.option1}}"
+							/>{{question.option1}}</span
+						>
+					</div>
+					<div>
+						<span class="optionVal"
+							><input
+								type="radio"
+								class="rdbtn"
+								id="rdbtn"
+								name="{{question.id}}"
+								value="{{question.option2}}"
+							/>{{question.option2}}</span
+						>
+					</div>
+					<div>
+						<span class="optionVal"
+							><input
+								type="radio"
+								class="rdbtn"
+								id="rdbtn"
+								name="{{question.id}}"
+								value="{{question.option3}}"
+							/>{{question.option3}}</span
+						>
+					</div>
+					<div>
+						<span class="optionVal"
+							><input
+								type="radio"
+								class="rdbtn"
+								id="rdbtn"
+								name="{{question.id}}"
+								value="{{question.option4}}"
+							/>{{question.option4}}</span
+						>
+					</div>
+					<div class="answers" style="display: none" style="margin-top: 1.5rem">
+						<div id="correctAnswer">
+							<span style="color: brown; font-weight: bold">Correct answer</span
+							>:
+							<span class="correctans" style="color: blue; font-weight: bold"
+								>{{question.correct_answer}}</span
+							>
+						</div>
+					</div>
+					<hr />
+				</div>
+				{% endfor %}
+			</div>
+			<div
+				style="
+					display: flex;
+					border: 2px solid green;
+					font-size: large;
+					flex-direction: row;
+					font-weight: bold;
+					display: none;
+					height: 3rem;
+					margin-bottom: 2rem;
+				"
+				id="result"
+			></div>
+			<center><button onclick="getAnswers()" id="btn">Submit</button></center>
+		</div>
+	</body>
+</html>
