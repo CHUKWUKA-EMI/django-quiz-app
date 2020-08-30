@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = '1oh&x1mh^tyubyk)4t(a$@g-l&mbe3gxi3v11-sv^e5mva0v%w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mcqs-quiz-app.herokuapp.com']
+ALLOWED_HOSTS = ['mcqs-quiz-app.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -75,14 +76,15 @@ WSGI_APPLICATION = 'djangoquiz.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+load_dotenv()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'nyqfwjbm',
-        'USER': 'nyqfwjbm',
-        'PASSWORD': 'guTyTPp3uWWlQTX_X3jxGVK0LJ81fS-c',
-        'HOST': 'lallah.db.elephantsql.com',
+        'NAME': os.getenv("DATABASE_NAME"),
+        'USER': os.getenv("DATABASE_USER"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD"),
+        'HOST': os.getenv("DATABASE_HOST"),
         'PORT': '5432',
     }
 }
