@@ -87,7 +87,9 @@ DATABASES = {
         'PASSWORD': os.getenv("DATABASE_PASSWORD"),
         'HOST': os.getenv("DATABASE_HOST"),
         'PORT': '5432',
-    }
+    },
+    'DATABASE_URL':os.getenv("DATABASE_URL")
+
 }
 
 # Password validation
