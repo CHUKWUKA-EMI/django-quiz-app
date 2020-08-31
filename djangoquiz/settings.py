@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from dotenv import load_dotenv
+import dj_database_url
 
 load_dotenv()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -78,19 +79,21 @@ WSGI_APPLICATION = 'djangoquiz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-
+# DATABASES['default']= dj_database_url.config(default=os.getenv("DATABASE_URL"))
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': os.getenv("DATABASE_NAME"),
-    #     'USER': os.getenv("DATABASE_USER"),
-    #     'PASSWORD': os.getenv("DATABASE_PASSWORD"),
-    #     'HOST': os.getenv("DATABASE_HOST"),
-    #     'PORT': '5432',
-    # },
-    'DATABASE_URL':os.getenv("DATABASE_URL")
+    'default': {
+          
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd1dk7ffra2lip0',
+        'USER': 'ijkfpkacnhcazs',
+        'PASSWORD': '9145f46502d1b39197ed52b15f693d41a9e5eb2e3c800516bbc626e739222035',
+        'HOST': 'ec2-34-192-30-15.compute-1.amazonaws.com',
+        'PORT': 5432
+    },
 
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
